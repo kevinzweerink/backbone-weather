@@ -1,0 +1,167 @@
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/*FONT FACE SET UP FOR ICON SET*/
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('fonts/icomoon.eot');
+    src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.woff') format('woff'),
+        url('fonts/icomoon.ttf') format('truetype'),
+        url('fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[data-icon]:before {
+    font-family: 'icomoon';
+    content: attr(data-icon);
+    speak: none;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "futura-pt",helvetica,arial;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #444444;
+    background-color: #e28259;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #f9d815;
+    padding: 2em;
+    color: #e28259;
+}
+
+.navbar h1 {
+    display: inline-block;
+}
+
+.navbar .icon {
+    float: right;
+    font-size: 2em;
+    margin-top: -.3em;
+}
+
+.navbar a {
+    color: #e28259;
+    text-decoration: none;
+}
+
+.search-form {
+    background-color: #eaeaea;
+    padding: 7em 0;
+    text-align: center;
+}
+
+.form-search {
+    width: 50%;
+    margin: auto;
+}
+
+.search-form label {
+    color: #e28259;
+    display: block;
+}
+
+.search-form input {
+    background-color: #eaeaea;
+    outline: none;
+    border: none;
+    border-bottom: 7px solid #444444;
+    width: 100%;
+    font-family: "futura-pt", helvetica, arial;
+    font-weight: bold;
+    font-size: 46px;
+    text-transform: uppercase;
+    margin-top: 1em;
+    color: #444444;
+    text-align: center;
+}
+
+#search {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+}
+
+.bottom-section {
+    color: #eaeaea;
+    width: 50%;
+    margin: auto;
+    font-size: 1.25em;
+}
+
+.bottom-section table {
+    width: 100%;
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+
+.bottom-section tbody {
+    width: 100%;
+}
+
+.bottom-section tr {
+    padding-bottom: .5em;
+    margin-bottom: 1em;
+    display: block;
+    width: 100%;
+    border-bottom: 7px solid #eaeaea;
+    overflow: hidden;
+}
+
+.bottom-section td {
+    display: block;
+    float: left;
+}
+
+.location {
+    width: 60%;
+}
+
+.temp {
+    width: 13.33333%;
+    text-align: right;
+}
+
+.image {
+    width: 13.33333%;
+    text-align: right;
+}
+
+.delete {
+    width: 13.33333%;
+    text-align: right;
+}
+
+.delete a {
+    color: #eaeaea;
+    text-decoration: none;
+}
+
+@media all and (max-width: 800px) {
+    .bottom-section {
+        width: 80%;
+    }
+
+    .form-search {
+        width: 80%;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .bottom-section {
+        width: 90%;
+    }
+
+    .form-search {
+        width: 90%;
+    }
+}
