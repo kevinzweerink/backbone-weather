@@ -24,6 +24,18 @@
     -webkit-font-smoothing: antialiased;
 }
 
+a {
+    -webkit-transition: -webkit-transform .2s ease;
+    -moz-transition: -moz-transform .2s ease;
+    transition: transform .2s ease;
+}
+
+a:hover {
+    -webkit-transform: translateY(-3px);
+    -moz-transform: translateY(-3px);
+    transform: translateY(-3px);
+}
+
 body {
     font-family: "futura-pt",helvetica,arial;
     font-weight: bold;
@@ -89,6 +101,33 @@ body {
     position: absolute;
     top: -99999px;
     left: -99999px;
+}
+
+.error {
+    border-bottom: 3px solid #e28259;
+}
+
+@keyframes borderRound {
+    0% {border-bottom: 3px solid #e28259;}
+    50% {border-bottom: 3px solid #f9d815;}
+    100% {border-bottom: 3px solid #e28259;}
+}
+
+@-webkit-keyframes borderRound {
+    0% {border-bottom: 3px solid #e28259;}
+    50% {border-bottom: 3px solid #f9d815;}
+    100% {border-bottom: 3px solid #e28259;}
+}
+
+#quip {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.underline {
+    border-bottom: 3px solid #e28259;
+    -webkit-animation: borderRound 2s ease 0 infinite;
 }
 
 .bottom-section {

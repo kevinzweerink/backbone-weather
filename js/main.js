@@ -1,10 +1,10 @@
 $(document).ready(function($) {
-  $("#search").on("click", function(e) {
+  $("#weather").on("onsubmit", function(e) {
     var $zip = $("#zip"),
       value = $zip.val();
 
     e.preventDefault();
-    if (value) {
+    if (value && value != "" && value != null && value != 0) {
       $.ajax({
         url: "http://api.wunderground.com/api/7eaec3b21b154448/conditions/q/" + $zip.val() + ".json",
         dataType: "jsonp",

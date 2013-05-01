@@ -24,8 +24,13 @@
 			// in a more convenent way to access it.
 			// observation becomes an object{};
 			var observation = data.current_observation,
-				icon = observation.icon,
 				iconClass = '';
+
+			if (!observation) {
+				var icon = "";
+			} else {
+				var icon = observation.icon;
+			}
 
 			if (icon === "mostlycloudy" || icon === "mostlysunny" || icon === "partlycloudy" || icon === "partlysunny" || icon === "hazy" || icon === "fog") {
 				iconClass = "&#xe003;";
@@ -39,16 +44,22 @@
 				iconClass = "&#xe004;"
 			} else {
 				iconClass = "&#xe006;"
-			}
+			}	
 
+			if (observation) {
+				return {
+					id: observation.display_location.zip,
+					icon: iconClass,
+					state: observation.display_location.state_name,
+					zip: observation.display_location.zip,
+					city: observation.display_location.city,
+					temp: observation.temp_f
+				}
 
-			return {
-				id: observation.display_location.zip,
-				icon: iconClass,
-				state: observation.display_location.state_name,
-				zip: observation.display_location.zip,
-				city: observation.display_location.city,
-				temp: observation.temp_f
+			} else {
+				return {
+					icon:"nope"
+				}
 			}
 		},
 		
@@ -62,7 +73,51 @@
 			// options parameter
 			// ! is a shortcut for checking if a value exists
 			if (!options.zip) {
-				return 'Please enter a zip code';
+				var error = 'Enter a <span class="error">valid</span> zip code',
+					quip = 'dumbass';
+
+				if ($("#zip-label").attr('data-state') === "unchanged") {
+					$('#zip-label').fadeOut(300, function() {
+						document.getElementById('zip-label').innerHTML = error;
+						$('#zip-label').fadeIn(300);
+					});
+					$('#zip-label').attr('data-state','change1');
+				} else if ( $("#zip-label").attr('data-state') === "change1" ) {
+					$('#zip-label').append(",");
+					window.setTimeout(function() {
+						$('#zip-label').append(" ");
+						window.setTimeout(function() {
+							$('#zip-label').append($('<span id="quip" />'));
+							window.setTimeout(function() {
+								$('#quip').append("d");
+								window.setTimeout(function() {
+									$('#quip').append("u");
+									window.setTimeout(function() {
+										$('#quip').append("m");
+										window.setTimeout(function() {
+											$('#quip').append("b");
+											window.setTimeout(function() {
+												$('#quip').append("a");
+												window.setTimeout(function() {
+													$('#quip').append("s");
+													window.setTimeout(function() {
+														$('#quip').append("s");
+													}, 70);
+												}, 50);
+											}, 30);
+										}, 100);
+									}, 50);
+								}, 50);
+							}, 50);
+						}, 60);
+					}, 50);
+					
+					$('#zip-label').attr('data-state','change2');
+				} else if ( $('#zip-label').attr('data-state') === "change2" ) {
+					$('#quip').addClass('underline');
+				}
+
+				return true;
 			}
 		}
 		
@@ -94,7 +149,7 @@
 			
 			this.model.on('error', this.toggleError, this)
 			
-			if ( this.model.set({ zip: this.$("#zip").val() }) ) {
+			if ( this.model.set({ zip: this.$("#zip").val() },{validate:true}) ) {
 				this.collection.add(this.model);
 				this.toggleError();
 			}
@@ -104,9 +159,8 @@
 			this.$("#zip").val('');
 		},
 		
-		toggleError: function(model, error) {
-			console.log(!!error);
-			this.$('.alert').text(error).toggle(!!error);
+		toggleError: function() {
+			this.$('.alert').css('opacity','0');
 		}
 	});
 	
@@ -123,17 +177,17 @@
 		
 		render: function(model) {
 			var view = new ForecastItemView({ id: model.get('zip'), model: model });
-			this.$('tbody').append(view.el).closest('table').fadeIn('slow');
+			this.$('tbody').append(view.el).closest('table').hide().fadeIn(300);
 		},
 		
 		remove: function(model) {
-			$( '#' + model.get('zip') ).remove();
+			$( '#' + model.get('zip') ).fadeOut(300, $( '#' + model.get('zip') ).remove());
 			
 			// !this.collection.length checks to see
 			// if there are no more items in collection
 			// fadeout $el, defined in forecastView = newForecastView();
 			if (!this.collection.length) {
-				this.$el.fadeOut('slow');
+				this.$el.fadeOut(300);
 			}
 		},
 		

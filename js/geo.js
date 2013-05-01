@@ -6,13 +6,14 @@ $(document).ready(function() {
 			dataType: "json",
 			type: "GET",
 			success: function(data) {
+				console.log("wtf");
 				$("#zip").val(data.results[0].address_components[6].long_name);
 			}
 		});
 	}
 
 	function error(position) {
-		console.log(position);
+		console.log('error finding position');
 	}
 
 	if(navigator.geolocation) {
@@ -23,6 +24,7 @@ $(document).ready(function() {
 
 	$("#geo").on("click", function(e) {
 	    e.preventDefault();
+	    console.log("wtf");
 	    if(navigator.geolocation) {
 	      navigator.geolocation.getCurrentPosition(success, error)
 	    } else {
